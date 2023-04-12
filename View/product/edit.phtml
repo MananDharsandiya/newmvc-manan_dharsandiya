@@ -1,0 +1,45 @@
+<?php 
+$product = $this->getProduct()['product'];
+?>
+<div class="container mt-5">
+	<form action="<?php echo $this->getUrl('save'); ?>" method="post">
+		<div class="row mb-3">
+			<div class="col-md-6">
+				<h2>Product Information</h2>
+			</div>
+			<div class="col-md-6 d-flex justify-content-end align-items-center">
+				<a href="<?php echo $this->getUrl('grid', null, [], true); ?>" class="btn btn-secondary me-2">Cancel</a>
+				<button type="submit" class="btn btn-success">Submit</button>
+			</div>
+		</div>
+		<div class="form-floating mb-3">
+			<input type="text" name="product[name]" class="form-control" id="nameInput" placeholder=" " value="<?php echo $product->name;?>">
+			<label>Name</label>
+		</div>
+		<div class="form-floating mb-3">
+			<input type="text" name="product[sku]" class="form-control" id="skuInput" placeholder=" " value="<?php echo $product->sku;?>">
+			<label>SKU</label>
+		</div>
+		<div class="form-floating mb-3">
+			<input type="text" name="product[cost]" class="form-control" id="costInput" placeholder=" " value="<?php echo $product->cost;?>">
+			<label>Cost</label>
+		</div>
+		<div class="form-floating mb-3">
+			<input type="text" name="product[price]" class="form-control" id="priceInput" placeholder=" " value="<?php echo $product->price;?>">
+			<label>Price</label>
+		</div>
+		<div class="form-floating mb-3">
+			<input type="text" name="product[quantity]" class="form-control" id="quantityInput" placeholder=" " value="<?php echo $product->quantity;?>">
+			<label>Quantity</label>
+		</div>
+		<div class="form-floating mb-3">
+			<select name="product[status]" class="form-select" id="statusSelect">
+				<?php foreach ($product->getStatusOptions() as $key => $value) : ?>
+					<?php $selected = ($key == $product->getStatus()) ? "selected" : ''; ?>
+					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+				<?php endforeach; ?>
+			</select>
+			<label>Status</label>
+		</div>
+	</form>
+</div>

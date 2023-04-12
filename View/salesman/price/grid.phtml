@@ -1,0 +1,59 @@
+<?php
+$salesmen = $this->getSalesmen();
+$salesmenPrice = $this->getSalesmenPrice();
+?>
+<form action="<?php echo $this->getUrl('save');?>" method="post">
+	<div class="body">
+		<div>Salesman Price</div>
+		<div class="box">
+			<select>
+				<?php foreach ($salesmen as $salesman) : ?>
+				<option value="<?php echo $salesman->salesman_id; ?>"><?php echo $salesman->first_name; ?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+		<div class="link">
+			<button type="submit" name="save">Update</button>
+			<a href="<?php echo $this->getUrl('grid', 'salesman', [], true);?>">Go Back</a>
+		</div>
+	</div>
+	<table width="100%" cellpadding="25%" border="1px">
+		<?php if (!$salesmenPrice): ?>
+		<tr>
+			<td colspan="7" align="center"><b>No data found.</b></td>
+		</tr>
+		<?php else: ?>
+		<tr>
+			<th>Product Id</th>
+			<th>Name</th>
+			<th>SKU</th>
+			<th>Cost</th>
+			<th>Price</th>
+			<th>Salesman Price</th>
+			<th>Remove</th>
+		</tr>
+		<?php 
+		foreach ($salesmenPrice as $salesmanPrice) :
+		?>
+		<tr>
+			<td><?php echo $salesmanPrice->product_id;?></td>
+			<td><?php echo $salesmanPrice->name;?></td>
+			<td><?php echo $salesmanPrice->sku;?></td>
+			<td><?php echo $salesmanPrice->cost;?></td>
+			<td><?php echo $salesmanPrice->price;?></td>
+			<td><input type="number" name="salesmanPrice[<?php echo $salesmanPrice->product_id;?>]" value="<?php echo $salesmanPrice->salesman_price; ?>"></td>
+			<td>
+				<?php
+					if (!$salesmanPrice->salesman_price) { echo ""; }
+					else {
+						?>
+						<a href="<?php echo $this->getUrl('delete', null, ['product_id' => $salesmanPrice->product_id]);?>">REMOVE</a>
+						<?php
+					}
+				?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+		<?php endif; ?>
+	</table>
+</form>

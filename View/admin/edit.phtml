@@ -1,0 +1,41 @@
+<?php 
+$admin = $this->getAdmin()['admin']; 
+?>
+<form action="<?php echo $this->getUrl('save'); ?>" method="post">
+	<?php $this->setTemplate('html/header.phtml')->render();?>
+	<div class="body">
+		<div>Admin</div>
+		<div class="cancel">
+			<button><a href="<?php echo $this->getUrl('grid', null, [], true); ?>">Cancel</a></button>
+		</div>
+		<div class="submit">
+			<button type="submit">Submit</button>
+		</div>
+	</div>
+	<div>Admin Information</div>
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><input type="text" name="admin[name]" value="<?php echo $admin->name; ?>"></td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td><input type="text" name="admin[email]" value="<?php echo $admin->email; ?>"></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="password" name="admin[password]" value="<?php echo $admin->password; ?>"></td>
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td>
+				<select name="admin[status]">
+					<?php foreach ($admin->getStatusOptions() as $key => $value) : ?>
+					<?php $selected = ($key == $admin->getStatus()) ? "selected" : ''; ?>
+					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+	</table>
+</form>

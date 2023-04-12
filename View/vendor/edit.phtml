@@ -1,0 +1,79 @@
+<?php
+$vendor = $this->getVendor()['vendor'];
+$vendorAddress = $this->getVendorAddress()['vendorAddress'];
+?>
+<form action="<?php echo $this->getUrl('save'); ?>" method="post">
+	<div class="add">
+		<div>Vendor</div>
+		<div class="cancel">
+			<button><a href="<?php echo $this->getUrl('grid', null, [], true); ?>">Cancel</a></button>
+		</div>
+		<div class="submit">
+			<button type="submit">Submit</button>
+		</div>
+	</div>
+	<div>Vendor Information</div>
+	<table>
+		<tr>
+			<td>First Name</td>
+			<td><input type="text" name="vendor[first_name]" value="<?php echo $vendor->first_name; ?>"></td>
+		</tr>
+		<tr>
+			<td>Last Name</td>
+			<td><input type="text" name="vendor[last_name]" value="<?php echo $vendor->last_name; ?>"></td>
+		</tr>
+		<tr>
+			<td>email</td>
+			<td><input type="text" name="vendor[email]" value="<?php echo $vendor->email; ?>"></td>
+		</tr>
+		<tr>
+			<td>Gender</td>
+			<td>
+				<select name="vendor[gender]">
+					<?php foreach ($vendor->getGenderOptions() as $key => $value) : ?>
+					<?php $selected = ($key == $vendor->getGender()) ? "selected" : ''; ?>
+					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Mobile</td>
+			<td><input type="text" name="vendor[mobile]" value="<?php echo $vendor->mobile; ?>"></td>
+		</tr>
+		<tr>
+			<td>status</td>
+			<td>
+				<select name="vendor[status]">
+					<?php foreach ($vendor->getStatusOptions() as $key => $value) : ?>
+					<?php $selected = ($key == $vendor->getStatus()) ? "selected" : ''; ?>
+					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+	</table>
+	<div>Address Information</div>
+	<table>
+		<tr>
+			<td>Address</td>
+			<td><input type="text" name="vendorAddress[address]" value="<?php echo $vendorAddress->address; ?>"></td>
+		</tr>
+		<tr>
+			<td>City</td>
+			<td><input type="text" name="vendorAddress[city]" value="<?php echo $vendorAddress->city; ?>"></td>
+		</tr>
+		<tr>
+			<td>State</td>
+			<td><input type="text" name="vendorAddress[state]" value="<?php echo $vendorAddress->state; ?>"></td>
+		</tr>
+		<tr>
+			<td>Country</td>
+			<td><input type="text" name="vendorAddress[country]" value="<?php echo $vendorAddress->country; ?>"></td>
+		</tr>
+		<tr>
+			<td>ZIP Code</td>
+			<td><input type="text" name="vendorAddress[zip]" value="<?php echo $vendorAddress->zip; ?>"></td>
+		</tr>
+	</table>
+</form>

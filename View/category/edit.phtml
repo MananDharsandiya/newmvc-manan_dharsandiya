@@ -1,0 +1,50 @@
+<?php 
+$category = $this->getCategory()['category'];
+$parentCategories = $this->getParentCategories()['parentCategories'];
+?>
+<form action="<?php echo $this->getUrl('save'); ?>" method="post">
+	<?php $this->setTemplate('html/header.phtml')->render();?>
+	<div class="add">
+		<div>Category</div>
+		<div class="cancel">
+			<button><a href="<?php echo $this->getUrl('grid', null, [], true); ?>">Cancel</a></button>
+		</div>
+		<div class="submit">
+			<button type="submit">Submit</button>
+		</div>
+	</div>
+	<div>Category Information</div>
+	<table>
+		<tr>
+			<td>Parent Category</td>
+			<td>
+				<select name="category[parent_id]">
+					<option>Select Parent</option>
+					<?php foreach($parentCategories as $categoryId => $path) : ?>
+					<?php $selected = ($categoryId == $category->parent_id) ? "selected" : ''; ?>
+					<option value="<?php echo $categoryId; ?>" <?php echo $selected; ?>><?php echo $category->getPathCategory($categoryId); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Name</td>
+			<td><input type="text" name="category[name]" value="<?php echo $category->name; ?>"></td>
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td>
+				<select name="category[status]">
+					<?php foreach ($category->getStatusOptions() as $key => $value) : ?>
+					<?php $selected = ($key == $category->getStatus()) ? "selected" : ''; ?>
+					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Description</td>
+			<td><input type="text" name="category[description]" value="<?php echo $category->description; ?>"></td>
+		</tr>
+	</table>
+</form>

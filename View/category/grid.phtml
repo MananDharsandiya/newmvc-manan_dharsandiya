@@ -1,0 +1,40 @@
+<?php
+$categories = $this->getCategories();
+?>
+<div class="container">
+	<div class="row mb-3">
+		<div class="col-md-6">
+			<h2>Manage Category</h2>
+		</div>
+			<div class="col-md-6 text-end">
+		<a href="<?php echo $this->getUrl('add', null , [], true);?>">Add Category</a>
+	</div>
+</div>
+<table width="100%" cellpadding="25%" border="1px">
+	<?php if (!$categories): ?>
+	<tr>
+		<td colspan="8" align="center"><b>No data found.</b></td>
+	</tr>
+	<?php else: ?>
+	<tr>
+		<th>Category_id</th>
+		<th>Name</th>
+		<th>Status</th>
+		<th>Created At</th>
+		<th>Updated At</th>
+		<th>EDIT</th>
+		<th>DELETE</th>
+	</tr>
+	<?php foreach ($categories as $category) : ?>
+	<tr>
+		<td><?php echo $category->category_id; ?></td>
+		<td><?php echo $category->getPathCategory($category->category_id); ?></td>
+		<td><?php echo $category->getStatusText(); ?></td>
+		<td><?php echo $category->created_at; ?></td>
+		<td><?php echo $category->updated_at; ?></td>
+		<td><a href="<?php echo $this->getUrl('edit', null, ['id'=> $category->category_id], true);?>"class="btn btn-sm btn-primary">EDIT</a></td>
+		<td><a href="<?php echo $this->getUrl('delete', null , ['id'=> $category->category_id], true);?>"class="btn btn-sm btn-danger">DELETE</a></td>
+	</tr>
+	<?php endforeach; ?>
+	<?php endif; ?>
+</table>

@@ -1,0 +1,32 @@
+<?php 
+$payment = $this->getPayment()['payment']; 
+?>
+<form action="<?php echo $this->getUrl('save'); ?>" method="post">
+	<div class="add">
+		<div>Payment Method</div>
+		<div class="cancel">
+			<button><a href="<?php echo $this->getUrl('grid', null, [], true); ?>">Cancel</a></button>
+		</div>
+		<div class="submit">
+			<button type="submit">Submit</button>
+		</div>
+	</div>
+	<div>Payment Method Information</div>
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><input type="text" name="payment[name]" value="<?php echo $payment->name; ?>"></td>
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td>
+				<select name="payment[status]">
+					<?php foreach ($payment->getStatusOptions() as $key => $value) : ?>
+					<?php $selected = ($key == $payment->getStatus()) ? "selected" : ''; ?>
+					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+	</table>
+</form>

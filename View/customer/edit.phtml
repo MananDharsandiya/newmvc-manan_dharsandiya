@@ -1,0 +1,79 @@
+<?php
+$customer = $this->getCustomer()['customer'];
+$customerAddress = $this->getCustomerAddress()['customerAddress'];
+?>
+<form action="<?php echo $this->getUrl('save'); ?>" method="post">
+	<div class="add">
+		<div>Customer</div>
+		<div class="cancel">
+			<button><a href="<?php echo $this->getUrl('grid', null, [], true); ?>">Cancel</a></button>
+		</div>
+		<div class="submit">
+			<button type="submit">Submit</button>
+		</div>
+	</div>
+	<div>Customer Information</div>
+	<table>
+		<tr>
+			<td>First Name</td>
+			<td><input type="text" name="customer[first_name]" value="<?php echo $customer->first_name; ?>"></td>
+		</tr>
+		<tr>
+			<td>Last Name</td>
+			<td><input type="text" name="customer[last_name]" value="<?php echo $customer->last_name; ?>"></td>
+		</tr>
+		<tr>
+			<td>email</td>
+			<td><input type="text" name="customer[email]" value="<?php echo $customer->email; ?>"></td>
+		</tr>
+		<tr>
+			<td>Gender</td>
+			<td>
+				<select name="customer[gender]">
+					<?php foreach ($customer->getGenderOptions() as $key => $value) : ?>
+					<?php $selected = ($key == $customer->getGender()) ? "selected" : ''; ?>
+					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Mobile</td>
+			<td><input type="text" name="customer[mobile]" value="<?php echo $customer->mobile; ?>"></td>
+		</tr>
+		<tr>
+			<td>status</td>
+			<td>
+				<select name="customer[status]">
+					<?php foreach ($customer->getStatusOptions() as $key => $value) : ?>
+					<?php $selected = ($key == $customer->getStatus()) ? "selected" : ''; ?>
+					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+	</table>
+	<div>Address Information</div>
+	<table>
+		<tr>
+			<td>Address</td>
+			<td><input type="text" name="customerAddress[address]" value="<?php echo $customerAddress->address; ?>"></td>
+		</tr>
+		<tr>
+			<td>City</td>
+			<td><input type="text" name="customerAddress[city]" value="<?php echo $customerAddress->city; ?>"></td>
+		</tr>
+		<tr>
+			<td>State</td>
+			<td><input type="text" name="customerAddress[state]" value="<?php echo $customerAddress->state; ?>"></td>
+		</tr>
+		<tr>
+			<td>Country</td>
+			<td><input type="text" name="customerAddress[country]" value="<?php echo $customerAddress->country; ?>"></td>
+		</tr>
+		<tr>
+			<td>ZIP Code</td>
+			<td><input type="text" name="customerAddress[zip]" value="<?php echo $customerAddress->zip; ?>"></td>
+		</tr>
+	</table>
+</form>

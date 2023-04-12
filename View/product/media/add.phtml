@@ -1,0 +1,39 @@
+<?php 
+$media = $this->getMedia()['media']; 
+?>
+<form action="<?php echo $this->getUrl('save', null, ['id' => $_GET['product_id']], true);?>" method="post" enctype="multipart/form-data">
+	<div class="add">
+		<div>
+			Add Media
+		</div>
+		<div class="cancel">
+			<a href="<?php echo $this->getUrl('grid', null, ['id' => $_GET['product_id']], true);?>">Cancel</a>
+		</div>
+		<div class="submit">
+			<button type="submit">Save</button>
+		</div>
+	</div>
+	<table>
+		<tr>
+			<td>Name</td>
+			<td>
+				<input type="text" name="media[name]">
+			</td>
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td>
+				<select name="media[status]">
+					<?php foreach ($media->getStatusOptions() as $key => $value) : ?>
+					<?php $selected = ($key == $media->getStatus()) ? "selected" : ''; ?>
+					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Image</td>
+			<td><input type="file" name="media[file]"></td>
+		</tr>
+	</table>
+</form>

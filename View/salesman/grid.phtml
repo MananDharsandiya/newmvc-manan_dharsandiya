@@ -1,0 +1,52 @@
+<?php
+$salesmen = $this->getSalesmen();
+?>
+<div class="container">
+	<div class="row mb-3">
+		<div class="col-md-6">
+			<h2>Manage Salesman</h2>
+		</div>
+			<div class="col-md-6 text-end">
+		<a href="<?php echo $this->getUrl('add', null, [], true);?>">Add Customer</a>
+	</div>
+</div>
+<table cellpadding="25%" border="1px">
+	<?php if (!$salesmen): ?>
+	<tr>
+		<td colspan="11" align="center"><b>No data found.</b></td>
+	</tr>
+	<?php else: ?>
+	<tr>
+		<th>Salesman Id</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>email</th>
+		<th>Gender</th>
+		<th>Mobile</th>
+		<th>Status</th>
+		<th>Price</th>
+		<th>Company</th>
+		<th>Created At</th>
+		<th>Updated At</th>
+		<th>EDIT</th>
+		<th>DELETE</th>
+	</tr>
+	<?php foreach ($salesmen as $salesman) : ?>
+	<tr>
+		<td><?php echo $salesman->salesman_id; ?></td>
+		<td><?php echo $salesman->first_name; ?></td>
+		<td><?php echo $salesman->last_name; ?></td>
+		<td><?php echo $salesman->email; ?></td>
+		<td><?php echo $salesman->getGenderText(); ?></td>
+		<td><?php echo $salesman->mobile; ?></td>
+		<td><?php echo $salesman->getStatusText(); ?></td>
+		<td><a href="<?php echo $this->getUrl('grid', 'salesman_price', ['id'=> $salesman->salesman_id]);?>">PRICE</a></td>
+		<td><?php echo $salesman->company; ?></td>
+		<td><?php echo $salesman->created_at; ?></td>
+		<td><?php echo $salesman->updated_at; ?></td>
+		<td><a href="<?php echo $this->getUrl('edit', null, ['id'=> $salesman->salesman_id]);?>"class="btn btn-sm btn-primary">EDIT</a></td>
+		<td><a href="<?php echo $this->getUrl('delete', null, ['id'=> $salesman->salesman_id]);?>"class="btn btn-sm btn-danger">DELETE</a></td>
+	</tr>
+	<?php endforeach; ?>
+	<?php endif; ?>
+</table>
