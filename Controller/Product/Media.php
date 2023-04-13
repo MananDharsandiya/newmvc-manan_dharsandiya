@@ -44,7 +44,7 @@ class Controller_Product_Media extends Controller_Core_Action
 				throw new Exception("Invalid request.", 1);
 			}
 
-			$media =  Ccc::getModel('Product_Media_Row');
+			$media =  Ccc::getModel('Product/Media/Media');
 			$media->product_id = $id;
 			$media->created_at = date("y-m-d H:i:s");
 
@@ -82,7 +82,7 @@ class Controller_Product_Media extends Controller_Core_Action
 					throw new Exception("Invalid request.", 1);
 				}
 
-				$media =  Ccc::getModel('Product_Media_Row');
+				$media =  Ccc::getModel('Product/Media/Media');
 				$media->setData(['base' => 0, 'small' => 0, 'thumbnail' => 0, 'gallery' => 0])->addData('product_id', $id)->getTable()->setPrimaryKey('product_id');
 				$media->save();
 
@@ -90,7 +90,7 @@ class Controller_Product_Media extends Controller_Core_Action
 					throw new Exception("Invalid data posted.", 1);
 				}
 
-				if (!Ccc::getModel('Product_Media_Row')->setData(['base' => 1])->addData('media_id', $postData)->save()) {
+				if (!Ccc::getModel('Product_Media')->setData(['base' => 1])->addData('media_id', $postData)->save()) {
 					throw new Exception("Unable to save.", 1);
 				}
 
@@ -98,7 +98,7 @@ class Controller_Product_Media extends Controller_Core_Action
 					throw new Exception("Invalid data posted.", 1);
 				}
 
-				if (!Ccc::getModel('Product_Media_Row')->setData(['small' => 1])->addData('media_id', $postData)->save()) {
+				if (!Ccc::getModel('Product_Media')->setData(['small' => 1])->addData('media_id', $postData)->save()) {
 					throw new Exception("Unable to save.", 1);
 				}
 
@@ -106,7 +106,7 @@ class Controller_Product_Media extends Controller_Core_Action
 					throw new Exception("Invalid data posted.", 1);
 				}
 
-				if (!Ccc::getModel('Product_Media_Row')->setData(['thumbnail' => 1])->addData('media_id', $postData)->save()) {
+				if (!Ccc::getModel('Product_Media')->setData(['thumbnail' => 1])->addData('media_id', $postData)->save()) {
 					throw new Exception("Unable to save.", 1);
 				}
 
@@ -114,7 +114,7 @@ class Controller_Product_Media extends Controller_Core_Action
 					throw new Exception("Invalid data posted.", 1);
 				}
 				
-				if (!Ccc::getModel('Product_Media_Row')->setData(['gallery' => 1])->addData('media_id', $postData)->save()) {
+				if (!Ccc::getModel('Product_Media')->setData(['gallery' => 1])->addData('media_id', $postData)->save()) {
 					throw new Exception("Unable to save.", 1);
 				}
 

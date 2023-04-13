@@ -31,8 +31,8 @@ $customerAddress = $this->getCustomerAddress()['customerAddress'];
 			<td>
 				<select name="customer[gender]">
 					<?php foreach ($customer->getGenderOptions() as $key => $value) : ?>
-					<?php $selected = ($key == $customer->getGender()) ? "selected" : ''; ?>
-					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+						<?php $selected = ($key == $customer->getGender()) ? "selected" : ''; ?>
+						<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
 					<?php endforeach; ?>
 				</select>
 			</td>
@@ -46,8 +46,8 @@ $customerAddress = $this->getCustomerAddress()['customerAddress'];
 			<td>
 				<select name="customer[status]">
 					<?php foreach ($customer->getStatusOptions() as $key => $value) : ?>
-					<?php $selected = ($key == $customer->getStatus()) ? "selected" : ''; ?>
-					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+						<?php $selected = ($key == $customer->getStatus()) ? "selected" : ''; ?>
+						<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
 					<?php endforeach; ?>
 				</select>
 			</td>

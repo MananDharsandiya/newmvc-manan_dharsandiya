@@ -1,0 +1,54 @@
+<?php
+$admins = $this->getAdmins();
+?>
+
+	<br/>
+	<br/>
+		<div class="alert alert-danger" role="alert">
+			<?php echo $this->getTitle(); ?>
+		<button class="btn btn-primary" type="submit">
+			<?php foreach($this->getButtons() as $key => $button) :?>
+					<a class="btn btn-primary" href="<?php echo $button['url']; ?>"><?php echo $button['title']; ?>
+					</a>
+			<?php endforeach; ?>
+		</button>
+		</tr>
+	</table>
+	<br/>
+	<br/>
+	<table class="table table-success table-striped">
+		<?php if (!$admins): ?>
+		<tr>
+			<td colspan="8" align="center"><b>No data found.</b></td>
+		</tr>
+		<?php else: ?>
+
+		<tr align="center">
+			<?php foreach ($this->getColumns() as $key => $column) : ?>
+				<th><?php echo $column['title']; ?></th>
+			<?php endforeach; ?>
+
+			<?php foreach ($this->getActions() as $key => $action) : ?>
+				<th><?php echo $action['title']; ?></th>
+			<?php endforeach; ?>
+		</tr>
+
+		<?php foreach ($admins as $admin) : ?>
+		<tr align="center">
+
+			<?php foreach($this->getColumns() as $key => $column): ?>
+				<td><?php echo $this->getColumnValue($admin, $key); ?></td>
+			<?php endforeach; ?>
+
+			<?php foreach($this->getActions() as $key => $action): ?>
+				<td><a href="<?php $method = $action['method']; echo $this->$method($row, $key); ?>"><?php echo $action['title'];?></a></td>
+				<td><a href="<?php echo $this->getUrl('edit', null, ['id' => $admin->admin_id], true) ?>"class="btn btn-sm btn-primary">EDIT</a></td>
+		<td><a href="<?php echo $this->getUrl('delete', null, ['id' => $admin->admin_id], true) ?>"class="btn btn-sm btn-primary">DELETE</a></td>
+			<?php endforeach; ?>
+		
+		</tr>
+		<?php endforeach; ?>
+		<?php endif; ?>
+	</table>
+</body>
+</html>

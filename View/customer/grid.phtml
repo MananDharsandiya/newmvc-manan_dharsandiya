@@ -24,6 +24,7 @@ $customers = $this->getCustomers();
 		<th>Gender</th>
 		<th>Mobile</th>
 		<th>Status</th>
+		<th>Address</th>
 		<th>Created At</th>
 		<th>Updated At</th>
 		<th>EDIT</th>
@@ -38,6 +39,7 @@ $customers = $this->getCustomers();
 		<td><?php echo $customer->getGenderText(); ?></td>
 		<td><?php echo $customer->mobile; ?></td>
 		<td><?php echo $customer->getStatusText(); ?></td>
+		<td><a href="<?php echo $this->getUrl('', null, ['id'=> $customer->customer_id]);?>">Address</a></td>
 		<td><?php echo $customer->created_at; ?></td>
 		<td><?php echo $customer->updated_at; ?></td>
 		<td><a href="<?php echo $this->getUrl('edit', null, ['id'=> $customer->customer_id]);?>"class="btn btn-sm btn-primary">EDIT</a></td>
